@@ -1,7 +1,7 @@
 class Player {
   PVector location, size;
   PVector speed = new PVector(0, 0);
-  PVector acceleration = new PVector(0, 0.9);
+  //PVector acceleration = new PVector(0, 0.9);
   boolean moveRight, moveLeft, moveUp, moveDown = false;
   //PShape player;
   //int startTime;       //startTime = millis();
@@ -28,27 +28,36 @@ class Player {
   }
 
   void mousePressed() {
-    if ( mouseX > location.x + size.x) {
-      location.x += speed.x;
-    } else if (mouseX < location.x - size.x) {
-      location.x -= speed.x;
+    if ( mouseX > location.x) {
+      moveRight = true;
     }
+    if (mouseX < location.x) {
+      moveLeft = true;
+    } 
 
-    if ( mouseY > location.y + size.y) {
-      location.y += speed.y;
+    if ( mouseY > location.y) {
+      moveDown = true;
     }
-    if ( mouseY < location.y - size.y) {
-      location.y -= speed.y;
+    if ( mouseY < location.y) {
+      moveUp = true;
     }
   }
   void mouseReleased() {
+    moveRight = false; 
+    moveLeft = false;
+    moveUp = false;
+    moveDown = false;
   }
 
   void movement() {
+    if (moveRight == true) location.x += speed.x;
+    if (moveLeft == true)  location.x -= speed.x;
+    if (moveUp == true) location.y -= speed.y;
+    if (moveDown == true) location.y += speed.y;
   }
   void update() {
     movement();
-    speed.add(acceleration);
+    //speed.add(acceleration);
   }
 
   void display() {
