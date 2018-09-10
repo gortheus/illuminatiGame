@@ -2,10 +2,12 @@ class Menu implements ILevel {
   boolean death;
   Player p;
   Wall w;
+  Wall b;
   Menu() {
     death = false;
     p = new Player();
     w = new Wall();
+    b = new Wall(0, 512, 50,50);
   }
 
   void draw() {
@@ -13,6 +15,7 @@ class Menu implements ILevel {
     checkCollisions();
     p.draw();
     w.draw();
+    b.draw();
   }
   void checkCollisions() {
     //Death

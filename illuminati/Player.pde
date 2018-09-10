@@ -1,8 +1,8 @@
 class Player {
   PVector location, size;
-  PVector speed = new PVector(0, 0);
-  //PVector acceleration = new PVector(0, 0.9);
-  boolean moveRight, moveLeft, moveUp, moveDown = false;
+  PVector speed;
+  PVector acceleration = new PVector(0, 0.9);
+  boolean moveRight, moveLeft, moveUp, moveDown, jump = false;
   //PShape player;
   //int startTime;       //startTime = millis();
   //int timePassed;      //timePassed = (millis() - startTime)/1000;
@@ -12,7 +12,7 @@ class Player {
   }
 
   Player(float x, float y, float w, float h) {
-    speed = new PVector(5, 5);
+    speed = new PVector(0, 0);
     location = new PVector(x, y);
     size = new PVector(w, h);
   }
@@ -28,36 +28,30 @@ class Player {
   }
 
   void mousePressed() {
-    if ( mouseX > location.x) {
-      moveRight = true;
+    speed.y = -20;
+    if (location.y <= 531) {
+      jump = true;
     }
-    if (mouseX < location.x) {
-      moveLeft = true;
-    } 
-
-    if ( mouseY > location.y) {
-      moveDown = true;
-    }
-    if ( mouseY < location.y) {
-      moveUp = true;
+    if (location.y > 512) {
+      jump = false;
     }
   }
   void mouseReleased() {
-    moveRight = false; 
-    moveLeft = false;
-    moveUp = false;
-    moveDown = false;
+    jump = false;
   }
 
   void movement() {
-    if (moveRight == true) location.x += speed.x;
-    if (moveLeft == true)  location.x -= speed.x;
-    if (moveUp == true) location.y -= speed.y;
-    if (moveDown == true) location.y += speed.y;
+    println(location.y);
+    if (location.y > 512 && jump == false) {
+      speed.y = 0;
+    }
+    location.add(speed);
   }
   void update() {
     movement();
-    //speed.add(acceleration);
+    if (location.y <= 512) {
+      speed.add(acceleration);
+    }
   }
 
   void display() {
