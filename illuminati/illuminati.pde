@@ -30,6 +30,10 @@ void mousePressed() {
   game.mousePressed();
 }
 
+void mouseClicked() {
+  game.mouseClicked();
+}
+
 void mouseReleased() {
 
   game.mouseReleased();

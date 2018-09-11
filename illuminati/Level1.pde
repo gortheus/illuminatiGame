@@ -1,10 +1,9 @@
-class Menu implements ILevel {
+class Level1 implements ILevel {
   boolean death;
   Player p;
   Wall w;
   Wall b;
-  boolean win = false;
-  Menu() {
+  Level1() {
     death = false;
     p = new Player();
     w = new Wall();
@@ -20,9 +19,9 @@ class Menu implements ILevel {
     pushStyle();
     textSize(50);
     fill(#000000);
-    text("PRESS W to START", 0, 10);
-    popStyle();
-  }
+    text("PRESS W to START", 0,10);
+    popStyle(); 
+}
   void checkCollisions() {
     //Death
   }
@@ -30,21 +29,20 @@ class Menu implements ILevel {
   int checkState() {
     if (death == true) { 
       return 2;
-    } else if (win == true) { 
-      return 1;
+    } else if (death == false) { 
+      return 0;
     }
     return 0;
   }
 
   void nextLevel() {
-    game = new Level1();
   }
   void restart() {
   }
 
   void keyPressed() {
-    if (key == 'w') {
-      win = true;
+    if(key == 'w'){
+      
     }
   }
   void keyReleased() {
